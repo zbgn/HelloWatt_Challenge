@@ -13,10 +13,54 @@
     </div>
 </div>
 
- -----> YOUR CODE HERE <-----
-
+<!-- YOUR CODE HERE -->
+<div class="container">
+  {% if messages %}
+    {% for message in messages %}
+      <div class="alert alert-{{ message.tags }} alert-dismissible" role="alert">
+        {{ message }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    {% endfor %}
+  {% endif %}
+  <div class="row">
+    <div class="col">
+      <p class="lead">
+        Chauffage électrique: {% if is_elec_heating %} <span class="valid"> ✓ </span> {% else %} <span class="invalid"> ✗ </span> {% endif %}
+      </p>
+    </div>
+    <div class="col">
+      <table class="table table-striped">
+        <caption>Dépenses annuelles</caption>
+        <thead>
+          <tr>
+            <th scope="col">Année</th>
+            <th scope="col">2016</th>
+            <th scope="col">2017</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td scope="row">Prix</td>
+            <td>{{ annual_costs.0 }} €</td>
+            <td>{{ annual_costs.1|floatformat:2 }} €</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col">
+      <p class="lead">Courbe de consommation de l'année 2017</p>
+      <div id="chart-watt-conso"></div>
+    </div>
+  </div>
+</div>
 {% endblock %}
-
 {% block script %}
+    <script>
+      var conso_euro = {{ conso_euro }};
+      var conso_watt = {{ conso_watt }};
+    </script>
     <script src="{% static 'dashboard/js/results.js' %}"></script>
 {% endblock %}

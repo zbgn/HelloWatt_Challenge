@@ -1,1 +1,11 @@
 /* ----> YOUR CODE HERE <---- */
+
+.valid{
+  color: green;
+  font-weight: bold;
+}
+
+.invalid{
+  color: red;
+  font-weight: bold;
+}
